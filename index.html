@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+			background-color: blue;
+        }
+        .container {
+			width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f7f7f7;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+		#email{
+			width: 40%;
+			height: 30px;
+			border-radius: 8px;
+		}
+		#mobile{
+			width: 40%;
+			height: 30px;
+			border-radius: 8px;
+		}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Survey Form</h2>
+        <form id="surveyForm">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" required>
+            
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" required>
+            
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" required>
+            
+            <label for="country">Country:</label>
+            <select id="country" required>
+                <option value="">Select a Country</option>
+                <option value="USA">USA</option>
+                <option value="Canada">Canada</option>
+                <option value="Canada">France</option>
+                <option value="Canada">India</option>
+                <option value="Canada">China</option>
+            </select>
+            
+            <label>Gender:</label>
+            <input type="checkbox" id="male"> <label for="male">Male</label>
+            <input type="checkbox" id="female"> <label for="female">Female</label>
+            <input type="checkbox" id="other"> <label for="other">Other</label>
+            
+            <label for="profession">Profession:</label>
+            <input type="text" id="profession" required>
+            
+          <input type="email" id="email" required placeholder="Email">
+            
+            <input type="tel" id="mobile" required placeholder="Enter Mobile Number">
+            
+            <button type="button" onclick="submitForm()">Submit</button>
+            <button type="button" onclick="resetForm()">Reset</button>
+        </form>
+    </div>
+
+    <script>
+        function submitForm() {
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var dob = document.getElementById('dob').value;
+            var country = document.getElementById('country').value;
+            var gender = document.querySelectorAll('input[type="checkbox"]:checked');
+            var profession = document.getElementById('profession').value;
+            var email = document.getElementById('email').value;
+            var mobile = document.getElementById('mobile').value;
+
+            if (
+                firstName === "" ||
+                lastName === "" ||
+                dob === "" ||
+                country === "" ||
+                gender.length === 0 ||
+                profession === "" ||
+                email === "" ||
+                mobile === ""
+            ) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            var summary = "Survey Summary:\n\n";
+            summary += "First Name: " + firstName + "\n";
+            summary += "Last Name: " + lastName + "\n";
+            summary += "Date of Birth: " + dob + "\n";
+            summary += "Country: " + country + "\n";
+            summary += "Gender: ";
+            for (var i = 0; i < gender.length; i++) {
+                summary += gender[i].nextSibling.textContent + " ";
+            }
+            summary += "\nProfession: " + profession + "\n";
+            summary += "Email: " + email + "\n";
+            summary += "Mobile Number: " + mobile + "\n";
+
+          
+            alert(summary);
+
+         
+            resetForm();
+        }
+
+        function resetForm() {
+            document.getElementById('surveyForm').reset();
+        }
+    </script>
+</body>
+</html>
